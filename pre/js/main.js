@@ -166,7 +166,7 @@ function initChart() {
         //Mostramos círculos
         chart.selectAll('.circle-65_74')
             .transition()
-            .delay(3500)
+            .delay(3000)
             .duration(500)
             .style('opacity', function(d,i) {
                 if(i == 0 || i == 14) {
@@ -179,7 +179,7 @@ function initChart() {
         //Mostramos labels
         chart.selectAll('.label-65_74')
             .transition()
-            .delay(3500)
+            .delay(3000)
             .duration(500)
             .style('opacity', function(d,i) {
                 if(i == 0 || i == 14) {

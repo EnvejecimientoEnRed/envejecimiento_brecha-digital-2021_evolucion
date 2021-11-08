@@ -126,12 +126,12 @@ body, button {
                     color: #000;
                     padding: 0px 8px 4px 3px;
                     border: 1.2px solid transparent;
-                    border-color: transparent transparent #41C0B4 transparent;
+                    border-color: transparent transparent #8F480D transparent;
                     cursor: pointer;
                 }
 
                 .second-elem .select-items div, .second-elem .select-selected {
-                    border-color: transparent transparent #e46b4f transparent;
+                    border-color: transparent transparent #8F480D transparent;
                 }
 
                 .short .select-items div, .short .select-selected {
@@ -141,7 +141,7 @@ body, button {
                 /* Style items (options): */
                 .select-items {
                     position: absolute;
-                    background-color: #41BFB5;
+                    background-color: #f3f3f3;
                     top: 100%;
                     left: 0;
                     right: 0;
@@ -150,7 +150,7 @@ body, button {
                 }
 
                 .second-elem .select-items {
-                    background-color: #e46b4f;
+                    background-color: #8F480D;
                 }
 
                 .short .select-items {
@@ -500,6 +500,14 @@ body, button {
         .chart {
             &__options {
                 justify-content: center;
+            }
+
+            &__legend {
+                justify-content: flex-start;
+
+                &--item {
+                    margin-top: 8px;
+                }
             }
         }
     }
