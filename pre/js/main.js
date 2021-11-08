@@ -13,7 +13,7 @@ let tooltip = d3.select('#tooltip');
 
 let innerData = [], nestedData = [], chartBlock = d3.select('#chart'), chart, x_c, x_cAxis, y_c, y_cAxis, line, paths;
 let currentSelected = 'ninguno';
-let margin = {top: 15, right: 10, bottom: 17.5, left: 35}, width, height;
+let margin = {top: 15, right: 10, bottom: 17.5, left: 40}, width, height;
 let colors = ['#76B8B8', '#8F480D', '#d8d8d8'];
 
 initChart();
@@ -63,23 +63,45 @@ function initChart() {
             .domain(nestedData[0].data.map(function(d) { return d.anio; }))
             .range([0, width]);
 
+        x_cAxis = function(g){
+            g.call(d3.axisBottom(x_c).tickValues(x_c.domain().filter(function(d,i) { return !(i%3); })))
+            g.call(function(g){g.selectAll('.tick line').remove();})
+            g.call(function(g){g.select('.domain').remove()});
+        }
+
         chart.append("g")
             .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(x_c));
+            .attr('class','x_c-axis')
+            .call(x_cAxis);
 
         // Add Y axis
         y_c = d3.scaleLinear()
             .domain([0, 100])
             .range([height, 10]);
 
+        y_cAxis = function(svg){
+            svg.call(d3.axisLeft(y_c).ticks(5).tickFormat(function(d) { return d + '%'; }))
+            svg.call(function(g){
+                g.selectAll('.tick line')
+                    .attr('class', function(d,i) {
+                        if (d == 0) {
+                            return 'line-special';
+                        }
+                    })
+                    .attr("x1", '0')
+                    .attr("x2", '' + width + '')
+            })
+            svg.call(function(g){g.select('.domain').remove()})
+        }      
+
         chart.append("g")
-            .call(d3.axisLeft(y_c));
+            .attr('class','y_c-axis')
+            .call(y_cAxis);
 
         //Línea
         line = d3.line()
             .x(function(d) { return x_c(d.anio) + x_c.bandwidth() / 2; })
-            .y(function(d) { return y_c(+d.valor); })
-            .curve(d3.curveNatural);
+            .y(function(d) { return y_c(+d.valor); });
 
         paths = chart.selectAll(".line")
             .data(nestedData)
@@ -106,7 +128,23 @@ function initChart() {
             .attr("stroke-dashoffset", 0)
             .duration(3000);
 
-        //Labels
+        //Circles > Primero y último
+        for(let i = 0; i < nestedData.length; i++) {
+            chart.selectAll('init')
+                .data(nestedData[i].data)
+                .enter()
+                .append('circle')
+                .attr('class', function(d) {
+                    return `circle circle-${nestedData[i].key}`;
+                })
+                .attr("r", '3.5')
+                .attr("cx", function(d) { return x_c(+d.anio) + x_c.bandwidth() / 2})
+                .attr("cy", function(d) { return y_c(+d.valor); })
+                .style("fill", colors[0])
+                .style('opacity', '0');
+        }
+
+        //Labels > Primero y último
         for(let i = 0; i < nestedData.length; i++) {
             chart.selectAll('init')
                 .data(nestedData[i].data)
@@ -116,21 +154,40 @@ function initChart() {
                     return `label label-${nestedData[i].key}`;
                 })
                 .text(function(d) {
-                    return d.valor;
+                    return d.valor.toString().replace('.',',') + '%';
                 })
                 .attr("x", function(d) { return x_c(+d.anio) + x_c.bandwidth() / 2})
                 .attr("y", function(d) { return y_c(+d.valor) - 10; })
-                .attr('font-size', '14px')
+                .attr('font-size', '12px')
                 .attr('text-anchor', 'middle')
                 .style('opacity', '0');
         }
+        
+        //Mostramos círculos
+        chart.selectAll('.circle-65_74')
+            .transition()
+            .delay(3500)
+            .duration(500)
+            .style('opacity', function(d,i) {
+                if(i == 0 || i == 14) {
+                    return '1';
+                } else {
+                    return '0';
+                }
+            }); 
 
-        //Mostramos los labels
+        //Mostramos labels
         chart.selectAll('.label-65_74')
             .transition()
             .delay(3500)
             .duration(500)
-            .style('opacity', '1');        
+            .style('opacity', function(d,i) {
+                if(i == 0 || i == 14) {
+                    return '1';
+                } else {
+                    return '0';
+                }
+            });  
     }); 
 }
 
@@ -150,12 +207,33 @@ function updateChart(tipo) {
             return line(d.data);
         });
 
-    //Labels a mostrar
+
+    //Círculos    
+    chart.selectAll(`.circle-${currentSelected}`)
+        .style('opacity','0');
+
+    chart.selectAll(`.circle-${tipo}`)
+        .style("fill", colors[1])
+        .style('opacity', function(d,i) {
+            if(i == 0 || i == 14) {
+                return '1';
+            } else {
+                return '0';
+            }
+        });
+    
+    //Labels
     chart.selectAll(`.label-${currentSelected}`)
         .style('opacity','0');
 
     chart.selectAll(`.label-${tipo}`)
-        .style('opacity','1');
+        .style('opacity', function(d,i) {
+            if(i == 0 || i == 14) {
+                return '1';
+            } else {
+                return '0';
+            }
+        }); 
 
     currentSelected = tipo;
     
@@ -167,6 +245,66 @@ function updateChart(tipo) {
 
 function animateChart() {
     //Que evolucionen de nuevo con los mismos colores que tenían
+
+    //Círculos 
+    chart.selectAll(`.circle`)
+        .style('opacity','0');
+
+    chart.selectAll(`.circle-${currentSelected}`)
+        .transition()
+        .delay(3000)
+        .duration(500)
+        .style("fill", colors[1])
+        .style('opacity', function(d,i) {
+            if(i == 0 || i == 14) {
+                return '1';
+            } else {
+                return '0';
+            }
+        });
+
+    chart.selectAll(`.circle-65_74`)
+        .transition()
+        .delay(3000)
+        .duration(500)
+        .style("fill", colors[0])
+        .style('opacity', function(d,i) {
+            if(i == 0 || i == 14) {
+                return '1';
+            } else {
+                return '0';
+            }
+        });
+    
+    //Labels
+    chart.selectAll(`.label`)
+        .style('opacity','0');
+
+    chart.selectAll(`.label-${currentSelected}`)
+        .transition()
+        .delay(3000)
+        .duration(500)
+        .style('opacity', function(d,i) {
+            if(i == 0 || i == 14) {
+                return '1';
+            } else {
+                return '0';
+            }
+        });
+
+    chart.selectAll(`.label-65_74`)
+        .transition()
+        .delay(3000)
+        .duration(500)
+        .style('opacity', function(d,i) {
+            if(i == 0 || i == 14) {
+                return '1';
+            } else {
+                return '0';
+            }
+        });
+    
+    //Líneas
     paths = chart.selectAll(".line");
 
     paths.attr("stroke-dasharray", 768 + " " + 768)
