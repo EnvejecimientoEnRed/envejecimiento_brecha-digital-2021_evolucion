@@ -236,13 +236,13 @@ body, button {
 
                 //En función de la clase CSS que le acompañe, tendrá un color u otro
                 &.first::before {
-                    background-color: #78bb6e;
+                    background-color: #76B8B8;
                 }
                 &.second::before {
-                    background-color: #6f0910;
+                    background-color: #8F480D;
                 }
                 &.third::before {
-                    background-color: grey;
+                    background-color: d8d8d8;
                 }
                 
             }

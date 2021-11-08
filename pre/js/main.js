@@ -12,8 +12,9 @@ let dataSource = 'https://raw.githubusercontent.com/CarlosMunozDiazCSIC/envejeci
 let tooltip = d3.select('#tooltip');
 
 let innerData = [], nestedData = [], chartBlock = d3.select('#chart'), chart, x_c, x_cAxis, y_c, y_cAxis, line, paths;
-let margin = {top: 5, right: 10, bottom: 17.5, left: 35}, width, height;
-let colors = ['#78bb6e', '#6f0910', '#cecece'];
+let currentSelected = 'ninguno';
+let margin = {top: 15, right: 10, bottom: 17.5, left: 35}, width, height;
+let colors = ['#76B8B8', '#8F480D', '#d8d8d8'];
 
 initChart();
 
@@ -36,7 +37,6 @@ function initChart() {
             }
         });
         innerData = innerData.reverse();
-
         let keys = data.columns.slice(2);
 
         nestedData = keys.map(function(item) {
@@ -70,7 +70,7 @@ function initChart() {
         // Add Y axis
         y_c = d3.scaleLinear()
             .domain([0, 100])
-            .range([height, 0]);
+            .range([height, 10]);
 
         chart.append("g")
             .call(d3.axisLeft(y_c));
@@ -105,18 +105,59 @@ function initChart() {
             .ease(d3.easeLinear)
             .attr("stroke-dashoffset", 0)
             .duration(3000);
+
+        //Labels
+        for(let i = 0; i < nestedData.length; i++) {
+            chart.selectAll('init')
+                .data(nestedData[i].data)
+                .enter()
+                .append('text')
+                .attr('class', function(d) {
+                    return `label label-${nestedData[i].key}`;
+                })
+                .text(function(d) {
+                    return d.valor;
+                })
+                .attr("x", function(d) { return x_c(+d.anio) + x_c.bandwidth() / 2})
+                .attr("y", function(d) { return y_c(+d.valor) - 10; })
+                .attr('font-size', '14px')
+                .attr('text-anchor', 'middle')
+                .style('opacity', '0');
+        }
+
+        //Mostramos los labels
+        chart.selectAll('.label-65_74')
+            .transition()
+            .delay(3500)
+            .duration(500)
+            .style('opacity', '1');        
     }); 
 }
 
 function updateChart(tipo) {
-    //Cambiamos el color a las líneas
-    console.log(tipo);
-
-    //Cambiamos la variable
-
-
     //Ponemos los datos de la brecha
-    
+    chart.selectAll(".line")
+        .attr("stroke", function(d){
+            if (d.key == '65_74') {
+                return colors[0];
+            } else if (d.key == tipo) {
+                return colors[1];
+            } else {
+                return colors[2];
+            }
+        })
+        .attr('d', function(d) {
+            return line(d.data);
+        });
+
+    //Labels a mostrar
+    chart.selectAll(`.label-${currentSelected}`)
+        .style('opacity','0');
+
+    chart.selectAll(`.label-${tipo}`)
+        .style('opacity','1');
+
+    currentSelected = tipo;
     
     //Hacemos nueva fotografía de la visualización
     setTimeout(() => {
@@ -126,11 +167,7 @@ function updateChart(tipo) {
 
 function animateChart() {
     //Que evolucionen de nuevo con los mismos colores que tenían
-    paths = chart.selectAll(".line")
-        .attr("stroke-width", 2)
-        .attr('d', function(d) {
-            return line(d.data);
-        });
+    paths = chart.selectAll(".line");
 
     paths.attr("stroke-dasharray", 768 + " " + 768)
         .attr("stroke-dashoffset", 768)
@@ -243,10 +280,10 @@ function displayContainer(elem) {
 
 ///// USO DE SELECTORES //////
 let x, i, j, l, ll, selElmnt, a, b, c;
-let currentSelected = 'ninguno';
 /* Look for any elements with the class "custom-select": */
 x = document.getElementsByClassName("custom-select");
 l = x.length;
+
 for (i = 0; i < l; i++) {
   selElmnt = x[i].getElementsByTagName("select")[0];
   ll = selElmnt.length;
@@ -273,8 +310,7 @@ for (i = 0; i < l; i++) {
         s = this.parentNode.parentNode.getElementsByTagName("select")[0];
         sl = s.length;
         h = this.parentNode.previousSibling;
-        currentSelected = e.target.getAttribute('data-value');   
-        updateChart(currentSelected);
+        updateChart(e.target.getAttribute('data-value'));
 
         for (i = 0; i < sl; i++) {
           if (s.options[i].innerHTML == this.innerHTML) {
