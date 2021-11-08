@@ -229,8 +229,8 @@ body, button {
                     top: 50%;
                     left: 0;
                     transform: translateY(-50%);
-                    width: 15px;
-                    height: 15px;
+                    width: 16px;
+                    height: 2px;
                     background-color: #ccc; /* Este es el atributo a modificar */
                 }
 
@@ -239,7 +239,10 @@ body, button {
                     background-color: #78bb6e;
                 }
                 &.second::before {
-                    background: linear-gradient(to top, #78bb6e 0%, #78bb6e 50%, #6f0910 50%, #6f0910 100%);
+                    background-color: #6f0910;
+                }
+                &.third::before {
+                    background-color: grey;
                 }
                 
             }
@@ -340,10 +343,6 @@ body, button {
     min-height: 46px;
     margin-bottom: 16px;
 
-    .b-chart & {
-        margin-bottom: 0px;
-    }
-
     .title {
         font-size: 1.25em;
         font-weight: 700;
@@ -362,9 +361,6 @@ body, button {
         font-size: 1em;
         font-weight: 700;
         margin-bottom: 8px;
-    }
-    &__subheader {
-        
     }
     &__paragraph {
         font-size: 0.9em;

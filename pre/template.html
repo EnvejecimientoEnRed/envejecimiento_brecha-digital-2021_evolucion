@@ -24,14 +24,15 @@
                     <div class="chart__options">
                         <div class="chart__options--filter">
                             <div class="b-custom-select">
-                                <div class="custom-select" style="width:300px;">
+                                <div class="custom-select" style="width:160px;">
                                     <select>
-                                      <option value="0">EdVS (INE)</option>
-                                      <option value="ine_tipo">EdVS (INE)</option>
-                                      <option value="echo-dfle_tipo">EdVS libre de discapacidad (ECHO)</option>
-                                      <option value="echo-chrdfle_tipo">EdVS libre de enfermedades crónicas (ECHO)</option>
-                                      <option value="renteria-plos_tipo">EdVS libre de enfermedades (PLOS ONE)</option>
-                                      <option value="renteria-ced_tipo">EdVS libre de enfermedades (CED)</option>
+                                      <option value="0">Ninguno</option>
+                                      <option value="ninguno_tipo">Ninguno</option>
+                                      <option value="16_24-tipo">Entre 16 y 24 años</option>
+                                      <option value="25_34-tipo">Entre 25 y 34 años</option>
+                                      <option value="35_44-tipo">Entre 35 y 44 años</option>
+                                      <option value="45_54-tipo">Entre 45 y 54 años</option>
+                                      <option value="55_64-tipo">Entre 55 y 64 años</option>
                                     </select>
                                </div>
                             </div>
@@ -44,8 +45,9 @@
                         </div>
                     </div>
                     <div class="chart__legend">
-                        <span class="chart__legend--item first">Resto de grupos</span>
-                        <span class="chart__legend--item second">Entre 65 y 74 años</span>
+                        <span class="chart__legend--item first">Entre 65 y 74 años (mayores)</span>
+                        <span class="chart__legend--item second">Grupo seleccionado</span>
+                        <span class="chart__legend--item third">Resto de grupos</span>
                     </div>
                 </div>
                 <div class="chart__viz" id="chart"></div>
@@ -64,20 +66,7 @@
                 <div class="b-title">
                     <h1 class="title">Notas adicionales al gráfico</h1>
                 </div>
-                <p class="text__paragraph">La esperanza de vida saludable (EdVS) es estudiada, por lo general, en ciertos casos donde se evidencia el tiempo vivido libre de dependencia, enfermedades crónicas, limitaciones funcionales, dolor o alguna combinación de estos.</p>
-                <p class="text__paragraph">Aunque todas las fuentes utilizadas en esta visualización utilizan una misma metodología de cálculo basada en el método de Sullivan (expuesta en el artículo), los resultados que ofrecen son diferentes. Hay que tener en cuenta las definiciones propias de los conceptos que las diferentes investigaciones utilizan en sus análisis.</p>
-                <p class="text__paragraph">Esto se debe a que, cada una de ellas, analiza la ausencia de buena salud de distinta forma:</p>
-                <p class="text__header">INE/EUROSTAT</p>
-                <p class="text__paragraph">La <a class="link" href="https://www.ine.es/ss/Satellite?L=es_ES&c=INESeccion_C&cid=1259926378861&p=1254735110672&pagename=ProductosYServicios%2FPYSLayout" target="_blank">definición</a> que ofrece el Instituto Nacional de Estadística (INE) como esperanza en buena salud es "el promedio de número de años esperados que vive una persona disfrutando de buena salud (en ausencia de limitaciones funcionales o de discapacidad)".</p>
-                <p class="text__paragraph">En este sentido, este indicador también se conoce como esperanza de vida libre de discapacidad.</p>
-                <p class="text__header">Proyecto ECHO (CSIC-CCHS)</p>
-                <p class="text__paragraph">El <a class="link" href="https://echo-erc.csic.es/" target="_blank">proyecto ECHO</a> investiga la relación entre la salud en las primeras etapas de la vida y sus efectos a largo plazo en la morbilidad, discapacidad y la mortalidad en poblaciones humanas modernas (ECHO, por su acrónimo en inglés).</p>
-                <p class="text__paragraph">Los autores de <a class="link" href="https://osf.io/preprints/socarxiv/mf6n8/" target="_blank">esta investigación</a> (publicada en septiembre de 2020) ofrecen dos tipos de análisis sobre la esperanza de vida. En el primero, la analizan libre de discapacidad (DFLE); en el segundo, libre de enfermedades crónicas.</p>
-                <p class="text__paragraph">Para este análisis, los investigadores consideran que la discapacidad es la presencia de una limitación funcional en, al menos, una de cinco actividades básicas en la vida diaria como i) comer y beber, ii) la movilidad funcional, iii) vestirse, iv) ir al baño y v) procursarse higiene básica.</p>
-                <p class="text__paragraph">Por su parte, para el análisis de las condiciones crónicas seleccionan cuatro grupos de enfermedades frecuentes: diabetes de tipo 2, enfermedad del corazón, enfermedades cerebrovasculares y cáncer.</p>
-                <p class="text__header">Investigaciones de Zueras y Rentería</p>
-                <p class="text__paragraph">En el <a class="link" href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0240923" target="_blank">artículo publicado en PLOS ONE</a> (de octubre de 2020), Pilar Zueras y Elisenda Rentería investigan la presencia de varios problemas de salud (asma, cáncer, diabetes, ictus, hipertensión, infarto de miocardio, enfermedad del corazón, enfermedad obstructiva pulmonar crónica (EPOC), dolor de espalda crónico y colesterol alto) para definir qué es una esperanza de vida libre de enfermedades. Estos datos se ofrecen con un intervalo de confianza del 95%.</p>
-                <p class="text__paragraph">En el artículo publicado en enero de 2021 en la revista de Perspectivas Demográficas del Centro de Estudios Demográficos (CED), las autoras siguen una misma línea pero, en este caso, descartan incluir el colesterol alto "ya que parte del aumento observado es consecuencia del cambio de parámetros de diagnóstico entre las  diferentes  encuestas."</p>
+                <p class="text__paragraph">Nota sobre la encuesta TIC</p>
             </section>
             <section class="content b-data">
                 <div class="b-title">
