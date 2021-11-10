@@ -522,7 +522,7 @@ body, button {
         
         .subtitle {
             //El ancho dependerá de la longitud del título > Para que no se pegue con el logo
-            //max-width: calc(100% - 100px);
+            max-width: calc(100% - 100px);
             width: 100%;
         }
     }
