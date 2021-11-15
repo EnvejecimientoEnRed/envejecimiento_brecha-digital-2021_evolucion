@@ -8,7 +8,7 @@ import * as d3 from 'd3';
 import '../css/main.scss';
 
 ///// VISUALIZACIÓN DEL GRÁFICO //////
-let dataSource = 'https://raw.githubusercontent.com/CarlosMunozDiazCSIC/envejecimiento_brecha-digital-2021_evolucion/main/data/evolucion_edad_tic.csv';
+let dataSource = 'https://raw.githubusercontent.com/envejecimientoenred/envejecimiento_brecha-digital-2021_evolucion/main/data/evolucion_edad_tic.csv';
 let tooltip = d3.select('#tooltip');
 
 let innerData = [], nestedData = [], chartBlock = d3.select('#chart'), chart, x_c, x_cAxis, y_c, y_cAxis, line, paths;
