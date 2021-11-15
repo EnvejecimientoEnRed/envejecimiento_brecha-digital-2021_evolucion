@@ -169,7 +169,7 @@ function initChart() {
             .delay(3000)
             .duration(500)
             .style('opacity', function(d,i) {
-                if(i == 0 || i == 14) {
+                if(i == 0 || i == 15) {
                     return '1';
                 } else {
                     return '0';
@@ -182,7 +182,7 @@ function initChart() {
             .delay(3000)
             .duration(500)
             .style('opacity', function(d,i) {
-                if(i == 0 || i == 14) {
+                if(i == 0 || i == 15) {
                     return '1';
                 } else {
                     return '0';
@@ -215,7 +215,7 @@ function updateChart(tipo) {
     chart.selectAll(`.circle-${tipo}`)
         .style("fill", colors[1])
         .style('opacity', function(d,i) {
-            if(i == 0 || i == 14) {
+            if(i == 0 || i == 15) {
                 return '1';
             } else {
                 return '0';
@@ -228,7 +228,7 @@ function updateChart(tipo) {
 
     chart.selectAll(`.label-${tipo}`)
         .style('opacity', function(d,i) {
-            if(i == 0 || i == 14) {
+            if(i == 0 || i == 15) {
                 return '1';
             } else {
                 return '0';
@@ -256,7 +256,7 @@ function animateChart() {
         .duration(500)
         .style("fill", colors[1])
         .style('opacity', function(d,i) {
-            if(i == 0 || i == 14) {
+            if(i == 0 || i == 15) {
                 return '1';
             } else {
                 return '0';
@@ -269,7 +269,7 @@ function animateChart() {
         .duration(500)
         .style("fill", colors[0])
         .style('opacity', function(d,i) {
-            if(i == 0 || i == 14) {
+            if(i == 0 || i == 15) {
                 return '1';
             } else {
                 return '0';
@@ -285,7 +285,7 @@ function animateChart() {
         .delay(3000)
         .duration(500)
         .style('opacity', function(d,i) {
-            if(i == 0 || i == 14) {
+            if(i == 0 || i == 15) {
                 return '1';
             } else {
                 return '0';
@@ -297,7 +297,7 @@ function animateChart() {
         .delay(3000)
         .duration(500)
         .style('opacity', function(d,i) {
-            if(i == 0 || i == 14) {
+            if(i == 0 || i == 15) {
                 return '1';
             } else {
                 return '0';
