@@ -1,5 +1,4 @@
 import html2canvas from 'html2canvas';
-import { getInTooltip, getOutTooltip, positionTooltip } from './tooltip';
 import { setRRSSLinks } from './rrss';
 import 'url-search-params-polyfill';
 import * as d3 from 'd3';
@@ -9,7 +8,6 @@ import '../css/main.scss';
 
 ///// VISUALIZACIÓN DEL GRÁFICO //////
 let dataSource = 'https://raw.githubusercontent.com/envejecimientoenred/envejecimiento_brecha-digital-2021_evolucion/main/data/evolucion_edad_tic.csv';
-let tooltip = d3.select('#tooltip');
 
 let innerData = [], nestedData = [], chartBlock = d3.select('#chart'), chart, x_c, x_cAxis, y_c, y_cAxis, line, paths;
 let currentSelected = 'ninguno';
