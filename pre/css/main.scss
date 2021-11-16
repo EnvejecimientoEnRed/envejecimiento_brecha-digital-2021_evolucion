@@ -324,7 +324,7 @@ body, button {
     //Logo > Dentro del bloque b-chart
     .logo {
         position: absolute;
-        top: 8px;
+        top: 0px;
         right: 0px;
 
         width: 76px;
@@ -344,15 +344,13 @@ body, button {
     margin-bottom: 16px;
 
     .title {
-        font-size: 1.25em;
+        font-size: 1.05em;
         font-weight: 700;
     }
     
     .subtitle {
-        font-size: 1em;
+        font-size: 0.95em;
         font-weight: 400;
-    
-        margin-top: 6px;
     }
 }
 
