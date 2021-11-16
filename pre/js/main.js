@@ -185,7 +185,11 @@ function initChart() {
                 } else {
                     return '0';
                 }
-            });  
+            });
+
+        setTimeout(() => {
+            setChartCanvas();
+        }, 5000);
     }); 
 }
 
